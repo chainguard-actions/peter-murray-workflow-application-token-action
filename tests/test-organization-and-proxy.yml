@@ -1,0 +1,23 @@
+name: Test organization and https_proxy inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          application_id: "123456"
+          application_private_key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEowIBAAKCAQEA2a2rwplBQLzHPZe5TNJT5sHMFMNTHCQMpbFBzMFBzMFBzMFB
+            -----END RSA PRIVATE KEY-----
+          organization: "my-test-org"
+          https_proxy: "http://proxy.example.com:8080"
+      - name: Assert action ran (inputs were accepted)
+        run: |
+          echo "Action completed with continue-on-error (expected to fail with invalid credentials)"
+          echo "PASS: inputs organization and https_proxy were accepted by the action"

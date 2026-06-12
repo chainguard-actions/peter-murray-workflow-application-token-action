@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v3.0.0 | [`v3.0.0`](https://github.com/chainguard-actions/peter-murray-workflow-application-token-action/tree/v3.0.0) | [`dc04139`](https://github.com/peter-murray/workflow-application-token-action/commit/dc0413987a085fa17d19df9e47d4677cf81ffef3) |
 | v3.0.1 | [`v3.0.1`](https://github.com/chainguard-actions/peter-murray-workflow-application-token-action/tree/v3.0.1) | [`baa1ef2`](https://github.com/peter-murray/workflow-application-token-action/commit/baa1ef2638c3d9e5967b7c8b86219f8fc919e1bb) |
 | v5.0.0 | [`v5.0.0`](https://github.com/chainguard-actions/peter-murray-workflow-application-token-action/tree/v5.0.0) | [`0e48752`](https://github.com/peter-murray/workflow-application-token-action/commit/0e48752d10f9c54a8fbc6ceffeca53402347e893) |
 

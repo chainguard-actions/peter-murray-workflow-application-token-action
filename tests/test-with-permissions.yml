@@ -1,4 +1,4 @@
-name: Test basic token generation
+name: Test token generation with specific permissions
 on:
   workflow_dispatch:
 jobs:
@@ -26,6 +26,7 @@ jobs:
         with:
           application_id: ${{ secrets.APPLICATION_ID }}
           application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+          permissions: "contents:read"
 
       - name: Assert token is non-empty
         if: steps.check-creds.outputs.skip == 'false'
@@ -34,13 +35,13 @@ jobs:
         run: |
           echo "token length: ${#TOKEN}"
           if [ -z "$TOKEN" ]; then
-            echo "FAIL: expected a non-empty token"
+            echo "FAIL: expected a non-empty token with scoped permissions"
             exit 1
           fi
-          echo "PASS: token was returned"
+          echo "PASS: token with scoped permissions was returned"
 
       - name: Skip notice
         if: steps.check-creds.outputs.skip == 'true'
         run: |
-          echo "SKIP: APPLICATION_ID secret not configured, skipping token generation test"
-          echo "This test requires a real GitHub App to be configured with APPLICATION_ID and APPLICATION_PRIVATE_KEY secrets"
+          echo "SKIP: APPLICATION_ID secret not configured, skipping scoped permissions test"
+          echo "This test requires a real GitHub App configured with APPLICATION_ID and APPLICATION_PRIVATE_KEY secrets"

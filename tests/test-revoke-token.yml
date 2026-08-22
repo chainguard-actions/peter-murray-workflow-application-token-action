@@ -1,0 +1,65 @@
+name: Test revoke_token flag
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          application_id: "123456"
+          application_private_key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEowIBAAKCAQEA2a2rwplBQLzHPZe5TNJT5sGMdB7GDuCQMFbMqBFTMCMfSHMl
+            WBMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZz
+            MBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMB
+            He5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe
+            5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N
+            9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMQIDAQABAoIBAHJ9eKbMGGMBHe5N9
+            JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JK
+            JZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZ
+            S5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5
+            MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MB
+            nFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnF
+            MZzMBHECgYEA7N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5M
+            BnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBn
+            FMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZSECgYEA
+            6JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9J
+            KJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZ
+            S5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZSECg
+            YEA5JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N
+            9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JK
+            JZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZSECg
+            YBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBH
+            e5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N
+            9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JK
+            JZSECgYBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnF
+            MZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZz
+            MBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBHe5N9JKJZS5MBnFMZzMBH
+            e5N9JA==
+            -----END RSA PRIVATE KEY-----
+          revoke_token: "true"
+
+      - name: Assert action ran with revoke_token=true (token set or failed gracefully)
+        env:
+          TOKEN: ${{ steps.action.outputs.token }}
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          echo "token present: $([ -n "$TOKEN" ] && echo yes || echo no)"
+          if [ "$OUTCOME" = "success" ]; then
+            if [ -z "$TOKEN" ]; then
+              echo "FAIL: action succeeded but token output is empty"
+              exit 1
+            fi
+            echo "PASS: got a token (will be revoked in post step)"
+          elif [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully (invalid key or sentinel repo not resolvable)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi

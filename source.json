@@ -4,8 +4,13 @@
   "version": "v5.1.1",
   "commit_sha": "dad2b81e50ce3edeb5f3b7ffbd79f731368bd668",
   "url": "https://github.com/peter-murray/workflow-application-token-action",
-  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "policy_sha": "374911c4be584df24e6da57af2d990570ef0f859",
   "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
   "test_agent_version": "2",
-  "harden_agent_version": "2"
+  "harden_agent_version": "2",
+  "dist_artifact": {
+    "gcs_uri": "gs://patch-actions-node-artifacts/dist-artifacts/peter-murray/workflow-application-token-action/v5.1.1/sha256-aaaeb2990313c6f0857efd7c0ff55728c1ae00f402d79562fb4687e898bcb2d4.tar.gz",
+    "sha256": "aaaeb2990313c6f0857efd7c0ff55728c1ae00f402d79562fb4687e898bcb2d4",
+    "size_bytes": 3680889
+  }
 }
